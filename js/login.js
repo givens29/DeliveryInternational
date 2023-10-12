@@ -1,12 +1,12 @@
-const form = document.getElementById('login');
-      const email = document.getElementById('email');
-      const password = document.getElementById('password')
-      form.addEventListener('submit',loginUser);
+let form = document.getElementById('login');
+let email = document.getElementById('email');
+let password = document.getElementById('password')
+form.addEventListener('submit',loginUser);
 
       function loginUser(event){
         event.preventDefault();
 
-        const user = {
+        let user = {
           email: form.elements.email.value,
           password: form.elements.password.value
         }

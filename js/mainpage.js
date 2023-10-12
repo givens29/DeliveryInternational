@@ -1,9 +1,10 @@
-const container = document.querySelector('.main_container');
-const paginationLinks = document.querySelectorAll('.pagination .page-link');
-const applyFilterButton = document.querySelector('.normBtn button');
-const menuItems = document.querySelectorAll('#menu-categories .dropdown-item');
-const sortingDropdown = document.querySelectorAll('#A-Z .dropdown-item');
-const vegetarianFilter = document.querySelector('#vegetarian-filter');
+let container = document.querySelector('.main_container');
+let paginationLinks = document.querySelectorAll('.pagination .page-link');
+let paginationContainer = document.getElementById('pagination-container');
+let applyFilterButton = document.querySelector('.normBtn button');
+let menuItems = document.querySelectorAll('#menu-categories .dropdown-item');
+let sortingDropdown = document.querySelectorAll('#A-Z .dropdown-item');
+let vegetarianFilter = document.querySelector('#vegetarian-filter');
 let selectedDishId;
 let pageNumber = 1;
 fetch(`https://food-delivery.kreosoft.ru/api/dish`, {
@@ -15,10 +16,9 @@ fetch(`https://food-delivery.kreosoft.ru/api/dish`, {
     .then(response => response.json())
       .then(data =>  {
         container.innerHTML = '';
-        
         data.dishes.forEach(dish => 
           {
-          const dishElem = document.createElement('div');
+          let dishElem = document.createElement('div');
           dishElem.className = 'col-md-4 mb-3';
           dishElem.innerHTML = `
             <div class="card" data-id="${dish.id}">
@@ -38,35 +38,34 @@ fetch(`https://food-delivery.kreosoft.ru/api/dish`, {
                 </div>
             </div>
           `;
-          const starsContainer = dishElem.querySelector('.rating');
-const rating = dish.rating;
-
+          let starsContainer = dishElem.querySelector('.rating');
+let rating = dish.rating;
 starsContainer.innerHTML = '';
 for (let i = 0; i < Math.floor(rating); i++) {
-  const star = document.createElement('div');
+  let star = document.createElement('div');
   star.classList.add('star', 'gold');
   starsContainer.appendChild(star);
 }
 
 if (rating % 1 !== 0) {
-  const halfStar = document.createElement('div');
+  let halfStar = document.createElement('div');
   halfStar.classList.add('star', 'half');
   starsContainer.appendChild(halfStar);
 }
 
-const emptyStarsCount = 10 - Math.ceil(rating);
+let emptyStarsCount = 10 - Math.ceil(rating);
 
 for (let i = 0; i < emptyStarsCount; i++) {
-  const emptyStar = document.createElement('div');
+  let emptyStar = document.createElement('div');
   emptyStar.classList.add('star');
   starsContainer.appendChild(emptyStar);
 }
 
-          const addToCartBtn = dishElem.querySelector('.add-to-cart-btn');
+          let addToCartBtn = dishElem.querySelector('.add-to-cart-btn');
 
           addToCartBtn.addEventListener('click', (event) => {
-            const selectedDish = dish.id;
-            const button = event.target;
+            let selectedDish = dish.id;
+            let button = event.target;
             fetch(`https://food-delivery.kreosoft.ru/api/basket/dish/${selectedDish}`, {
               method: 'POST',
               headers: {
@@ -87,7 +86,7 @@ for (let i = 0; i < emptyStarsCount; i++) {
             })
             .catch(error => console.error(error));
           });
-          const clickdish = dishElem.querySelector('.box1');
+          let clickdish = dishElem.querySelector('.box1');
           clickdish.addEventListener('click', () => {
             window.location.href = `menuitem.html?id=${dish.id}`;
           });
@@ -99,7 +98,7 @@ for (let i = 0; i < emptyStarsCount; i++) {
 paginationLinks.forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
-    const pageNumber = parseInt(e.target.getAttribute('href').substring(1));   
+    let pageNumber = parseInt(e.target.getAttribute('href').substring(1));   
     fetch(`https://food-delivery.kreosoft.ru/api/dish?page=${pageNumber}`, {
       method: 'GET',
       headers: {
@@ -111,7 +110,7 @@ paginationLinks.forEach(link => {
         container.innerHTML = '';
 
         data.dishes.forEach(dish => {
-          const dishElem = document.createElement('div');
+          let dishElem = document.createElement('div');
           dishElem.className = 'col-md-4 mb-3';
           dishElem.innerHTML = `
           <div class="card" data-id="${dish.id}">
@@ -131,26 +130,26 @@ paginationLinks.forEach(link => {
             </div>
         </div>
           `;
-          const starsContainer = dishElem.querySelector('.rating');
-          const rating = dish.rating;
+          let starsContainer = dishElem.querySelector('.rating');
+          let rating = dish.rating;
           
           starsContainer.innerHTML = '';
           for (let i = 0; i < Math.floor(rating); i++) {
-            const star = document.createElement('div');
+            let star = document.createElement('div');
             star.classList.add('star', 'gold');
             starsContainer.appendChild(star);
           }
           
           if (rating % 1 !== 0) {
-            const halfStar = document.createElement('div');
+            let halfStar = document.createElement('div');
             halfStar.classList.add('star', 'half');
             starsContainer.appendChild(halfStar);
           }
           
-          const emptyStarsCount = 10 - Math.ceil(rating);
+          let emptyStarsCount = 10 - Math.ceil(rating);
           
           for (let i = 0; i < emptyStarsCount; i++) {
-            const emptyStar = document.createElement('div');
+            let emptyStar = document.createElement('div');
             emptyStar.classList.add('star');
             starsContainer.appendChild(emptyStar);
           }
@@ -159,11 +158,11 @@ paginationLinks.forEach(link => {
             link.classList.remove('active');
           });
           link.classList.add('active');
-          const addToCartBtn = dishElem.querySelector('.add-to-cart-btn');
+          let addToCartBtn = dishElem.querySelector('.add-to-cart-btn');
 
           addToCartBtn.addEventListener('click', (event) => {
-            const selectedDish = dish.id;
-            const button = event.target;
+            let selectedDish = dish.id;
+            let button = event.target;
             fetch(`https://food-delivery.kreosoft.ru/api/basket/dish/${selectedDish}`, {
               method: 'POST',
               headers: {
@@ -184,6 +183,10 @@ paginationLinks.forEach(link => {
             })
             .catch(error => console.error(error));
           });
+          let clickdish = dishElem.querySelector('.box1');
+          clickdish.addEventListener('click', () => {
+            window.location.href = `menuitem.html?id=${dish.id}`;
+          });
           container.appendChild(dishElem);
         });
       })
@@ -196,6 +199,7 @@ menuItems.forEach(item => {
       item.classList.remove('active');
     });
     item.classList.add('active');
+    paginationContainer.style.display='none';
   });
 });
 sortingDropdown.forEach(item => {
@@ -211,7 +215,7 @@ applyFilterButton.addEventListener('click', () => {
   let url = 'https://food-delivery.kreosoft.ru/api/dish';
   menuItems.forEach(item => {
     if (item.classList.contains('active')) {
-      const category = item.id;
+      let category = item.id;
       url += `?categories=${category}`;
     }
   });
@@ -222,7 +226,7 @@ applyFilterButton.addEventListener('click', () => {
   }
   sortingDropdown.forEach(item => {
     if (item.classList.contains('active')) {
-      const sorting = item.id;
+      let sorting = item.id;
       url += `&sorting=${sorting}`;
     }
   });
@@ -238,7 +242,7 @@ applyFilterButton.addEventListener('click', () => {
         container.innerHTML = '';
 
         data.dishes.forEach(dish => {
-          const dishElem = document.createElement('div');
+          let dishElem = document.createElement('div');
           dishElem.className = 'col-md-4 mb-3';
           dishElem.innerHTML = `
           <div class="card" data-id="${dish.id}">
@@ -258,35 +262,35 @@ applyFilterButton.addEventListener('click', () => {
             </div>
         </div>
           `;
-          const starsContainer = dishElem.querySelector('.rating');
-          const rating = dish.rating;
+          let starsContainer = dishElem.querySelector('.rating');
+          let rating = dish.rating;
           
           starsContainer.innerHTML = '';
           for (let i = 0; i < Math.floor(rating); i++) {
-            const star = document.createElement('div');
+            let star = document.createElement('div');
             star.classList.add('star', 'gold');
             starsContainer.appendChild(star);
           }
           
           if (rating % 1 !== 0) {
-            const halfStar = document.createElement('div');
+            let halfStar = document.createElement('div');
             halfStar.classList.add('star', 'half');
             starsContainer.appendChild(halfStar);
           }
           
-          const emptyStarsCount = 10 - Math.ceil(rating);
+          let emptyStarsCount = 10 - Math.ceil(rating);
           
           for (let i = 0; i < emptyStarsCount; i++) {
-            const emptyStar = document.createElement('div');
+            let emptyStar = document.createElement('div');
             emptyStar.classList.add('star');
             starsContainer.appendChild(emptyStar);
           }
           
-          const addToCartBtn = dishElem.querySelector('.add-to-cart-btn');
+          let addToCartBtn = dishElem.querySelector('.add-to-cart-btn');
 
           addToCartBtn.addEventListener('click', (event) => {
-            const selectedDish = dish.id;
-            const button = event.target;
+            let selectedDish = dish.id;
+            let button = event.target;
             fetch(`https://food-delivery.kreosoft.ru/api/basket/dish/${selectedDish}`, {
               method: 'POST',
               headers: {
@@ -307,11 +311,12 @@ applyFilterButton.addEventListener('click', () => {
             })
             .catch(error => console.error(error));
           });
+          let clickdish = dishElem.querySelector('.box1');
+          clickdish.addEventListener('click', () => {
+            window.location.href = `menuitem.html?id=${dish.id}`;
+          });
           container.appendChild(dishElem);
         });
       })
       .catch(error => console.error(error));
 });
-  $(document).ready(function() {
-    $('.dropdown-toggle').dropdown();
-  });

@@ -1,6 +1,6 @@
-const dishId = localStorage.getItem('selectedDishId');
-const container = document.querySelector('.orders-container');
-const url = `https://food-delivery.kreosoft.ru/api/order`;
+let dishId = localStorage.getItem('selectedDishId');
+let container = document.querySelector('.orders-container');
+let url = `https://food-delivery.kreosoft.ru/api/order`;
 
 fetch(url, {
     method: 'GET',
@@ -13,9 +13,9 @@ fetch(url, {
     .then(dish => {
         container.innerHTML = '';
         dish.forEach((item, index) => {
-            const orderTime = item.orderTime.split("T")[0];
-            const deliveryTime = new Date(item.deliveryTime);
-            const formattedDeliveryTime = deliveryTime.toLocaleString('en-US', {
+            let orderTime = item.orderTime.split("T")[0];
+            let deliveryTime = new Date(item.deliveryTime);
+            let formattedDeliveryTime = deliveryTime.toLocaleString('en-US', {
                 year: 'numeric',
                 month: '2-digit',
                 day: '2-digit',
@@ -99,13 +99,13 @@ fetch(url, {
             let id = item.id;
             url += `${id}`;
             url += `/status`;
-            const detail= document.getElementById('detail');
+            let detail= document.getElementById('detail');
             detail.addEventListener('click', () => {
                 window.location.href = `orderDetail.html?id=${item.id}`;
                 localStorage.setItem("OrderDetail", item.id);
             });
 
-            const confirmOrders = dishElem.querySelector('.confirmOrder');
+            let confirmOrders = dishElem.querySelector('.confirmOrder');
             if (confirmOrders) {
                 confirmOrders.addEventListener('click', () => {
                     fetch(url, {

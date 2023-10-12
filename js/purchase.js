@@ -1,5 +1,5 @@
-const container = document.querySelector('.main_container');
-const form = document.getElementById('createOrder');
+let container = document.querySelector('.main_container');
+let form = document.getElementById('createOrder');
 let totalPrice = 0;
 fetch('https://food-delivery.kreosoft.ru/api/account/profile', {
   method: 'GET',
@@ -10,14 +10,14 @@ fetch('https://food-delivery.kreosoft.ru/api/account/profile', {
 })
   .then(response => response.json())
   .then(data => {
-    const phonenumber = document.getElementById('phone-number');
+    let phonenumber = document.getElementById('phone-number');
     phonenumber.value = data.phoneNumber;
-    const email = document.getElementById('email');
+    let email = document.getElementById('email');
     email.value = data.email;
   })
   .catch(error => console.error(error));
 
-const containers = document.querySelector('.itemList');
+let containers = document.querySelector('.itemList');
 
 fetch(`https://food-delivery.kreosoft.ru/api/basket`,{
     method: 'GET',
@@ -31,9 +31,9 @@ fetch(`https://food-delivery.kreosoft.ru/api/basket`,{
     containers.innerHTML = '';
     dish.forEach((item, index) => {
         let totalItemPrice = item.price * item.amount;
-        const itemTotalPrice = item.price * item.amount;
+        let itemTotalPrice = item.price * item.amount;
         totalPrice += itemTotalPrice;
-        const dishElem = document.createElement('div');
+        let dishElem = document.createElement('div');
         dishElem.className = 'row-md-4 mb-3';
         dishElem.innerHTML = `
           <div>
@@ -67,7 +67,7 @@ fetch(`https://food-delivery.kreosoft.ru/api/basket`,{
         `;
         containers.appendChild(dishElem);
       })
-      const totalElem = document.createElement('div');
+      let totalElem = document.createElement('div');
       totalElem.innerHTML = `
         <div>
           <p>Total: ${totalPrice}₽</p>
@@ -76,9 +76,9 @@ fetch(`https://food-delivery.kreosoft.ru/api/basket`,{
       `;
       containers.appendChild(totalElem);
 
-      const confirmOrders = document.querySelector('.confirmOrder');
+      let confirmOrders = document.querySelector('.confirmOrder');
       confirmOrders.addEventListener('click', ()=> {
-        const orderConf = {
+        let orderConf = {
           deliveryTime: document.getElementById('delivery-time').value,
           address: document.getElementById('delivery-address').value
         }

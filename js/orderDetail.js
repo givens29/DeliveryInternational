@@ -1,4 +1,4 @@
-const container = document.querySelector('.orderDetail-container');
+let container = document.querySelector('.orderDetail-container');
 let orderId=localStorage.getItem("OrderDetail");
 let totalPrice = 0;
 let url = `https://food-delivery.kreosoft.ru/api/order/`;
@@ -12,9 +12,9 @@ fetch(url, {
 })
   .then(response => response.json())
   .then(order => {
-    const orderTime = order.orderTime.split("T")[0];
-        const deliveryTime = new Date(order.deliveryTime);
-        const formattedDeliveryTime = deliveryTime.toLocaleString('en-US', {
+    let orderTime = order.orderTime.split("T")[0];
+        let deliveryTime = new Date(order.deliveryTime);
+        let formattedDeliveryTime = deliveryTime.toLocaleString('en-US', {
           year: 'numeric',
           month: '2-digit',
           day: '2-digit',
@@ -22,7 +22,7 @@ fetch(url, {
           minute: '2-digit'
         });
     container.innerHTML = '';
-    const dishElem = document.createElement('div');
+    let dishElem = document.createElement('div');
     dishElem.className = 'row-md-4 mb-3';
     dishElem.innerHTML = `
     <div class="row">
@@ -35,14 +35,14 @@ fetch(url, {
       </div>
     `;
     container.appendChild(dishElem);  
-    const dishesContainer = document.createElement('div');
+    let dishesContainer = document.createElement('div');
   dishesContainer.className = 'dishes-container';
 
   order.dishes.forEach((dish, index) => {
     let totalItemPrice = dish.price * dish.amount;
-    const itemTotalPrice = dish.price * dish.amount;
+    let itemTotalPrice = dish.price * dish.amount;
     totalPrice += itemTotalPrice;
-    const dishElem = document.createElement('div');
+    let dishElem = document.createElement('div');
     dishElem.className = 'dish-item';
     dishElem.innerHTML = `
     <div class="row">
@@ -62,7 +62,7 @@ fetch(url, {
     dishesContainer.appendChild(dishElem);
   });
   container.appendChild(dishesContainer);
-  const totalElem = document.createElement('div');
+  let totalElem = document.createElement('div');
       totalElem.innerHTML = `
         <div>
           <p>Total: ${totalPrice}₽</p>

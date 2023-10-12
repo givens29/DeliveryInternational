@@ -1,7 +1,7 @@
-const params = new URLSearchParams(window.location.search);
-const dishId = params.get('id');
-const container = document.querySelector('.itemcontainer');
-const url = `https://food-delivery.kreosoft.ru/api/dish/${dishId}`;
+let params = new URLSearchParams(window.location.search);
+let dishId = params.get('id');
+let container = document.querySelector('.itemcontainer');
+let url = `https://food-delivery.kreosoft.ru/api/dish/${dishId}`;
 fetch(url, {
   method: 'GET',
   headers: {
@@ -11,7 +11,7 @@ fetch(url, {
   .then(response => response.json())
   .then(dish => {
     container.innerHTML = '';
-    const dishElem = document.createElement('div');
+    let dishElem = document.createElement('div');
     let Veg = '';
     if(`${dish.vegetarian}`){
       Veg += "Vegetarian";
@@ -36,26 +36,26 @@ fetch(url, {
         </div>
       </div>
     `;
-    const starsContainer = dishElem.querySelector('.rating');
-    const rating = dish.rating;
+    let starsContainer = dishElem.querySelector('.rating');
+    let rating = dish.rating;
     
     starsContainer.innerHTML = '';
     for (let i = 0; i < Math.floor(rating); i++) {
-      const star = document.createElement('div');
+      let star = document.createElement('div');
       star.classList.add('star', 'gold');
       starsContainer.appendChild(star);
     }
     
     if (rating % 1 !== 0) {
-      const halfStar = document.createElement('div');
+      let halfStar = document.createElement('div');
       halfStar.classList.add('star', 'half');
       starsContainer.appendChild(halfStar);
     }
     
-    const emptyStarsCount = 10 - Math.ceil(rating);
+    let emptyStarsCount = 10 - Math.ceil(rating);
     
     for (let i = 0; i < emptyStarsCount; i++) {
-      const emptyStar = document.createElement('div');
+      let emptyStar = document.createElement('div');
       emptyStar.classList.add('star');
       starsContainer.appendChild(emptyStar);
     }

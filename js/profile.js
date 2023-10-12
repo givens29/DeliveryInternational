@@ -1,5 +1,5 @@
-const profileForm = document.getElementById('profile');
-const dataForm = document.getElementById('data-form');
+let profileForm = document.getElementById('profile');
+let dataForm = document.getElementById('data-form');
 fetch('https://food-delivery.kreosoft.ru/api/account/profile', {
   method: 'GET',
   headers: {
@@ -9,34 +9,34 @@ fetch('https://food-delivery.kreosoft.ru/api/account/profile', {
 })
   .then(response => response.json())
   .then(data => {
-    const name = document.getElementById('name');
+    let name = document.getElementById('name');
     name.value = data.fullName;
-    const email = document.getElementById('email');
+    let email = document.getElementById('email');
     email.value = data.email;
-    const birthdate = document.getElementById('birthdate');
-    const date = new Date(data.birthDate);
-    const formattedDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+    let birthdate = document.getElementById('birthdate');
+    let date = new Date(data.birthDate);
+    let formattedDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
     birthdate.value = formattedDate;
-    const gender = document.getElementById('gender');
+    let gender = document.getElementById('gender');
     gender.value = data.gender;
-    const address = document.getElementById('address');
+    let address = document.getElementById('address');
     address.value = data.address;
-    const phonenumber = document.getElementById('phone-number');
+    let phonenumber = document.getElementById('phone-number');
     phonenumber.value = data.phoneNumber;
     
   })
   .catch(error => console.error(error));
 
-const editProfile = document.getElementById('editProfile');
+let editProfile = document.getElementById('editProfile');
 editProfile.addEventListener('click', function() {
   event.preventDefault();
-  const name = document.getElementById('name');
-  const email = document.getElementById('email');
-  const birthdate = document.getElementById('birthdate');
-  const gender = document.getElementById('gender');
-  const address = document.getElementById('address');
-  const phonenumber = document.getElementById('phone-number');
-  const editProfile ={
+  let name = document.getElementById('name');
+  let email = document.getElementById('email');
+  let birthdate = document.getElementById('birthdate');
+  let gender = document.getElementById('gender');
+  let address = document.getElementById('address');
+  let phonenumber = document.getElementById('phone-number');
+  let editProfile ={
        fullName: name.value,
        birthDate: birthdate.value,
        gender: gender.value,

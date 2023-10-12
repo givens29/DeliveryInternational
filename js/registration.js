@@ -1,10 +1,10 @@
-const form = document.getElementById('register');
+let form = document.getElementById('register');
 form.addEventListener('submit',registerUser);
 
 function registerUser(event){
   event.preventDefault();
 
-  const user = {
+  let user = {
     fullName: form.elements.name.value,
     password: form.elements.password.value,
     email: form.elements.email.value,

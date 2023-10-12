@@ -1,4 +1,4 @@
-const containers = document.querySelector('.main_container');
+let containers = document.querySelector('.main_container');
 let RemoveId;
 let totalItems = 0;
 
@@ -14,7 +14,7 @@ fetch(`https://food-delivery.kreosoft.ru/api/basket`, {
     containers.innerHTML = '';
     dish.forEach((item, index) => {
       totalItems++;
-      const dishElem = document.createElement('div');
+      let dishElem = document.createElement('div');
       dishElem.className = 'row-md-4 mb-3';
       dishElem.innerHTML = `
           <div class="container">
@@ -45,15 +45,15 @@ fetch(`https://food-delivery.kreosoft.ru/api/basket`, {
 
         containers.appendChild(dishElem);
 
-      const removeButton = dishElem.querySelector('.remove-button');
-      const increaseButton = dishElem.querySelector('.increase-button');
-      const decreaseButton = dishElem.querySelector('.decrease-button');
-      const quantityInput = dishElem.querySelector('.quantity-input');
+      let removeButton = dishElem.querySelector('.remove-button');
+      let increaseButton = dishElem.querySelector('.increase-button');
+      let decreaseButton = dishElem.querySelector('.decrease-button');
+      let quantityInput = dishElem.querySelector('.quantity-input');
 
-      const dishId = item.id;
+      let dishId = item.id;
 
       removeButton.addEventListener('click', function () {
-        const listItem = removeButton.closest('li');
+        let listItem = removeButton.closest('li');
         listItem.remove();
 
         fetch(`https://food-delivery.kreosoft.ru/api/basket/dish/${dishId}?increase=false`, {
